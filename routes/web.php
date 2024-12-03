@@ -15,6 +15,8 @@ use App\Http\Controllers\Umum\ProfilesController as ProfileUmumController;
 use App\Models\News;
 use App\Models\Vidios;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -54,10 +56,15 @@ Route::prefix('profile')->group(function () {
 /* Admin */
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
-        return view('admin.auth.login');
+        if(session()->has('isLoggin')){
+            return view('admin.dashboard.dashboard');
+        }else{
+            return view('admin.auth.login');
+        }
     })->name('admin.login.page');
 
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login');
+    Route::get('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
     Route::get('/dashboard', function () {
         return view('admin.dashboard');

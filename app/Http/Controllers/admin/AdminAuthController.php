@@ -5,34 +5,47 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Models\Document;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class AdminAuthController extends Controller
 {
     public function login(Request $request)
     {
-        // $client = new Client([
-        //     'headers' => [
-        //         'Content-Type' => 'application/x-www-form-urlencoded', // Disable Expect header
-        //         'Accept' => '*/*',
-        //         'Accept-Encoding' => 'gzip, deflate, br',
-        //         'Connection'=>'keep-alive',
-        //     ],
-        // ]);
-        // $response = $client->post('https://cis-dev.del.ac.id/api/jwt-api/do-auth', [
-        //     'form_params' => [
-        //         'username' => "johannes",
-        //         'password' => "Del@2022",
-        //     ],
-        //     'timeout' => 60, // Increase the timeout if needed
-        //     'max_redirects' => 5, // Allow redirects
-        //     'http_errors' => false, // Disable automatic HTTP error handling
-        // ]);
+        $email = $request->email;
+        $password = Hash::make($request->password);
 
-        // $data = json_decode($response->getBody(), true);
-        // echo $data;
+        
 
-        return view('admin.dashboard.dashboard');
+        $user = DB::table('users')
+                ->where('email', $email)
+                ->first();
+
+        if ($user && Hash::check($request->password, $user->password_hash)) {
+            Session::put('user_id', $user->user_id);
+            Session::put('name', $user->name);
+            Session::put('role_id', $user->role_id);
+            Session::put('email', $user->email);
+            Session::put('isLoggin', TRUE);
+
+
+            return redirect('/admin');
+        }
+        else{
+            return redirect()->back()->withInput()->with('error', 'Akun Admin Belum Terdaftar');
+        }
+
+    }
+
+    public function logout(){
+        session()->flush();
+
+        session()->invalidate();
+        return redirect('/admin');
     }
 }
