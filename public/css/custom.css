@@ -1,0 +1,428 @@
+.pagination-wrapper .pagination {
+    justify-content: center;
+    display: flex;
+}
+
+.pagination-wrapper .pagination li {
+    margin: 0 5px;
+}
+
+.pagination-wrapper .pagination li a {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.pagination-wrapper .pagination li.active a {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination-wrapper .pagination li.disabled a {
+    background-color: #f5f5f5;
+    color: #ccc;
+}
+
+/* Navbar Animasi */
+.logo-animated {
+    animation: fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-brand:hover {
+    color: #ffd700; /* Warna emas saat hover */
+}
+
+/* Logo Animasi */
+.logo-animated {
+    width: 40px;
+    margin-right: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-animated:hover {
+    transform: rotate(360deg) scale(1.2);
+}
+
+/* Hover Efek pada Link */
+.nav-link {
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #ffd700; /* Warna emas saat hover */
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #ffd700;
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-item.active .nav-link::after {
+    width: 100%;  /* Membuat garis bawah penuh saat menu aktif */
+}
+/* Tombol Khusus */
+.navbar .btn-outline-light {
+    border-color: #fff;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.navbar .btn-outline-light:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Dropdown Submenu */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block; /* Menampilkan dropdown menu */
+    opacity: 0.9;
+    transform: translateY(5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Menyembunyikan submenu secara default */
+.nav-item.dropdown .dropdown-menu {
+    display: none; /* Menyembunyikan submenu */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    background-color: rgba(25, 135, 84, 1); /* Warna hijau navbar */
+    border-radius: 5px; /* Membuat sudut lebih lembut */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Bayangan lembut */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Border tipis */
+}
+
+/* Item di dalam dropdown */
+.dropdown-menu .dropdown-item {
+    padding: 10px 20px;
+    color: white; /* Warna teks putih */
+    text-align: left;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+/* Efek hover pada item dropdown */
+.dropdown-menu .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Efek hover lebih halus */
+    color: white; /* Tetap putih */
+    padding-left: 30px; /* Efek geser sedikit saat hover */
+}
+
+/* Animasi Transisi Dropdown */
+.navbar-nav .nav-item.dropdown {
+    position: relative;
+}
+
+/* Pastikan dropdown submenu selalu berada di atas elemen lain */
+.navbar-nav .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+}
+
+
+/* Footer Animasi */
+
+.footer-custom {
+    background-color: rgba(25, 135, 84, 1);
+    color: white;
+    animation: fadeIn 2s ease-in-out; /* Animasi masuk */
+    opacity: 0; /* Mulai dengan transparan */
+}
+
+.footer-section {
+    transition: background-color 0.5s ease;
+}
+
+/* Animasi hover pada link */
+.footer-custom a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-custom a:hover {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+.footer-section {
+    padding-top: 20px; /* Menambah ruang kosong hanya di atas */
+    background-color: rgba(25, 135, 84, 1); /* Warna hijau navbar */
+    color: white; /* Warna teks tetap putih */
+}
+
+.footer-section a {
+    color: white; /* Warna tautan */
+    text-decoration: none; /* Hilangkan garis bawah */
+    transition: color 0.3s ease; /* Efek transisi untuk hover */
+}
+
+.footer-section a:hover {
+    color: lightgray; /* Warna abu-abu muda saat hover */
+}
+
+/* Keyframes untuk fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.footer-section {
+    animation: fadeIn 2s ease-in-out; /* Animasi berlangsung selama 2 detik */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Mulai dengan transparansi penuh */
+    }
+    to {
+        opacity: 1; /* Menjadi sepenuhnya terlihat */
+    }
+}
+
+.footer-section a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: white;
+    left: 0;
+    bottom: -2px;
+    transition: width 0.3s ease;
+}
+
+
+.footer-section a:hover {
+    color: lightgray; /* Perubahan warna teks saat hover */
+}
+
+.footer-section a:hover::after {
+    width: 100%; /* Garis underline muncul penuh */
+}
+
+/* Footer Animasi */
+
+.carousel img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+/* Styling untuk pagination Dokumen*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+
+
+.pagination .page-link {
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 25px;
+    background-color: #f8f9fa;
+    color: rgba(25, 135, 84, 1);
+    font-weight: 600;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+}
+
+.pagination .page-link i {
+    font-size: 18px; /* Ukuran ikon yang lebih kecil */
+    margin: 0 5px;
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(25, 135, 84, 1);
+    color: white;
+}
+
+.pagination .active .page-link {
+    background-color: rgba(25, 135, 84, 1);
+    color: white;
+}
+
+.pagination .disabled .page-link {
+    background-color: #e9ecef;
+    color: #6c757d;
+}
+
+/* Styling untuk card dokumen */
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #6c757d;
+}
+.pagination .page-item {
+    border-radius: 50px; /* Lengkungkan seluruh tombol */
+}
+
+/* Untuk memberikan border-radius lebih spesifik pada Previous dan Next */
+.pagination .page-item:first-child .page-link {
+    border-top-left-radius: 30px; /* Lengkung kiri untuk Previous */
+    border-bottom-left-radius: 30px; /* Lengkung kiri untuk Previous */
+}
+
+.pagination .page-item:last-child .page-link {
+    border-top-right-radius: 30px; /* Lengkung kanan untuk Next */
+    border-bottom-right-radius: 30px; /* Lengkung kanan untuk Next */
+}
+
+.pagination-info {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 10px;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+    height: 15vh; 
+}
+
+.title-styling {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #007bff, #6c757d);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 3px solid #fff;
+}
+
+
+.title-styling:hover {
+    background: linear-gradient(45deg, #28a745, #6c757d);
+    cursor: pointer;
+}
+/* Styling untuk pagination Dokumen*/
+
+
+/* Styling untuk Vidio Terbaru */
+.vidio-container {
+    background-color: #B0C4DE;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.vidio-container .card {
+    transition: transform 0.3s ease;
+}
+
+.vidio-container .card:hover {
+    transform: scale(1.03);
+}
+
+/* Custom Pagination Styling */
+
+/* Card Styling */
+.vidio-container .card-body {
+    padding: 15px;
+}
+
+.vidio-container .card-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.vidio-container .card-text {
+    font-size: 14px;
+    color: #666;
+}
+
+.vidio-container iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+
+
+
+
+/* Container untuk Berita */
+.news-container {
+    background-color: #B0C4DE;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.news-container .card {
+    transition: transform 0.3s ease;
+}
+
+.news-container .card:hover {
+    transform: scale(1.03);
+}
+
