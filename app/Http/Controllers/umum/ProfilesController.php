@@ -10,22 +10,67 @@ class ProfilesController extends Controller
 {
 
     public function directToPengantar(){
-        return view("umum.profil.pengantar");
+        $data = DB::table('profiles')
+            ->where('item', "Pengantar")
+            ->where('status', 'active')
+            ->first();
+
+        // Jika data tidak ditemukan, tampilkan halaman 404
+        if (!$data) {
+            abort(404, 'Halaman tidak ditemukan.');
+        }
+        return view("umum.profil.pengantar", compact('data'));
     }
 
     public function directToRuangLingkup(){
-        return view("umum.profil.ruangLingkup");
+        $data = DB::table('profiles')
+            ->where('item', "Ruang Lingkup")
+            ->where('status', 'active')
+            ->first();
+
+        // Jika data tidak ditemukan, tampilkan halaman 404
+        if (!$data) {
+            abort(404, 'Halaman tidak ditemukan.');
+        }
+        return view("umum.profil.ruangLingkup", compact('data'));
     }
 
     public function directToTugas(){
-        return view("umum.profil.tugas");
+        $data = DB::table('profiles')
+            ->where('item', "Tugas Dan Wewenang")
+            ->where('status', 'active')
+            ->first();
+
+        // Jika data tidak ditemukan, tampilkan halaman 404
+        if (!$data) {
+            abort(404, 'Halaman tidak ditemukan.');
+        }
+        return view("umum.profil.tugas", compact('data'));
     }
     
     public function directToAlurPelaporan(){
-        return view ("umum.profil.alurPelaporan");
+        $data = DB::table('profiles')
+            ->where('item', "Alur Pelaporan")
+            ->where('status', 'active')
+            ->first();
+
+        // Jika data tidak ditemukan, tampilkan halaman 404
+        if (!$data) {
+            abort(404, 'Halaman tidak ditemukan.');
+        }
+        return view ("umum.profil.alurPelaporan", compact('data'));
     }
 
     public function directToStruktur(){
-        return view("umum.profil.strukturOrganisasi");
+        $data = DB::table('profiles')
+            ->where('item', "Struktur Organisasi")
+            ->where('status', 'active')
+            ->first();
+
+        // Jika data tidak ditemukan, tampilkan halaman 404
+        if (!$data) {
+            abort(404, 'Halaman tidak ditemukan.');
+        }
+        return view("umum.profil.strukturOrganisasi", compact('data'));
     }
 }
