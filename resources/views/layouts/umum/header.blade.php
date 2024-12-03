@@ -17,11 +17,9 @@
                         Profil
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{ route('profile.pengantar') }}">Pengantar</a></li>
-                        <li><a class="dropdown-item" href="{{ route('profile.ruangLingkup') }}">Ruang Lingkup</a></li>
-                        <li><a class="dropdown-item" href="{{ route('profile.tugasWewenang') }}">Tugas Dan Wewenang</a></li>
-                        <li><a class="dropdown-item" href="{{ route('profile.struktur') }}">Struktur Organisasi</a></li>
-                        <li><a class="dropdown-item" href="{{ route('profile.alur') }}">Alur Pelaporan</a></li>
+                        @foreach($menuItems as $item)
+                            <li><a class="dropdown-item" href="{{ route('profile.detail', ''.$item->item) }}">{{$item->item}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="nav-item {{ request()->routeIs('umum.dokumen.index') ? 'active' : '' }}">

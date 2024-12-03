@@ -46,11 +46,7 @@ Route::prefix('berita')->group(function () {
 });
 
 Route::prefix('profile')->group(function () {
-    Route::get('/pengantar', [ProfileUmumController::class, 'directToPengantar'])->name('profile.pengantar');
-    Route::get('/ruang-lingkup', [ProfileUmumController::class, 'directToRuangLingkup'])->name('profile.ruangLingkup');
-    Route::get('/tugas-wewenang', [ProfileUmumController::class, 'directToTugas'])->name('profile.tugasWewenang');
-    Route::get('/struktur-organisasi', [ProfileUmumController::class, 'directToStruktur'])->name('profile.struktur');
-    Route::get('/alur-pelaporan', [ProfileUmumController::class, 'directToAlurPelaporan'])->name('profile.alur');
+    Route::get('{item}', [ProfileUmumController::class, 'detail'])->name('profile.detail');
 });
 
 

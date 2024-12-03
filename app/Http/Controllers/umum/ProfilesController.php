@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\DB;
 class ProfilesController extends Controller
 {
 
-    public function directToPengantar(){
+    public function detail($item){
         $data = DB::table('profiles')
-            ->where('item', "Pengantar")
+            ->where('item', $item)
             ->where('status', 'active')
             ->first();
 
@@ -19,58 +19,6 @@ class ProfilesController extends Controller
         if (!$data) {
             abort(404, 'Halaman tidak ditemukan.');
         }
-        return view("umum.profil.pengantar", compact('data'));
-    }
-
-    public function directToRuangLingkup(){
-        $data = DB::table('profiles')
-            ->where('item', "Ruang Lingkup")
-            ->where('status', 'active')
-            ->first();
-
-        // Jika data tidak ditemukan, tampilkan halaman 404
-        if (!$data) {
-            abort(404, 'Halaman tidak ditemukan.');
-        }
-        return view("umum.profil.ruangLingkup", compact('data'));
-    }
-
-    public function directToTugas(){
-        $data = DB::table('profiles')
-            ->where('item', "Tugas Dan Wewenang")
-            ->where('status', 'active')
-            ->first();
-
-        // Jika data tidak ditemukan, tampilkan halaman 404
-        if (!$data) {
-            abort(404, 'Halaman tidak ditemukan.');
-        }
-        return view("umum.profil.tugas", compact('data'));
-    }
-    
-    public function directToAlurPelaporan(){
-        $data = DB::table('profiles')
-            ->where('item', "Alur Pelaporan")
-            ->where('status', 'active')
-            ->first();
-
-        // Jika data tidak ditemukan, tampilkan halaman 404
-        if (!$data) {
-            abort(404, 'Halaman tidak ditemukan.');
-        }
-        return view ("umum.profil.alurPelaporan", compact('data'));
-    }
-
-    public function directToStruktur(){
-        $data = DB::table('profiles')
-            ->where('item', "Struktur Organisasi")
-            ->where('status', 'active')
-            ->first();
-
-        // Jika data tidak ditemukan, tampilkan halaman 404
-        if (!$data) {
-            abort(404, 'Halaman tidak ditemukan.');
-        }
-        return view("umum.profil.strukturOrganisasi", compact('data'));
+        return view("umum.profil.profile_item", compact('data'));
     }
 }
