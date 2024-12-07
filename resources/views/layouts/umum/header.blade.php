@@ -28,8 +28,8 @@
                 <li class="nav-item {{ request()->routeIs('umum.berita.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('umum.berita.index') }}">Berita</a>
                 </li>
-                <li class="nav-item {{ request()->is('laporkan') ? 'active' : '' }}">
-                    <a class="nav-link" href="#">Laporkan</a>
+                <li class="nav-item {{ request()->is('report.form') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('report.form') }}">Laporkan</a>
                 </li>
             </ul>
         </div>

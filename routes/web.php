@@ -12,6 +12,7 @@ use App\Http\Controllers\Umum\HomeController;
 use App\Http\Controllers\Umum\NewsController as UmumNewsController;
 use App\Http\Controllers\Umum\DocumentController as UmumDocumentController;
 use App\Http\Controllers\Umum\ProfilesController as ProfileUmumController;
+use App\Http\Controllers\Umum\UmumReportController;
 use App\Models\News;
 use App\Models\Vidios;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,10 @@ Route::prefix('berita')->group(function () {
 
 Route::prefix('profile')->group(function () {
     Route::get('{item}', [ProfileUmumController::class, 'detail'])->name('profile.detail');
+});
+Route::prefix('report')->group(function(){
+    Route::get('/', [UmumReportController::class, 'directToForm'])->name('report.form');
+    Route::post('/store', [UmumReportController::class, 'store'])->name('report.store');
 });
 
 
