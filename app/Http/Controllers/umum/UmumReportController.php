@@ -61,7 +61,7 @@ class UmumReportController extends Controller
                 }
             }
             else{
-                return response()->json(['error' => 'Permintaan gagal.'], 500);
+                return redirect()->back()->withInput()->with('error', "Gagal terhubung ke server. Silahkan coba lagi!");
             }
         } catch (Exception $e) {
             // Log error umum
@@ -69,7 +69,7 @@ class UmumReportController extends Controller
             Log::error("File: " . $e->getFile());
             Log::error("Line: " . $e->getLine());
 
-            return response()->json(['error' => 'Terjadi kesalahan.'], 500);
+            return redirect()->back()->withInput()->with('error', "Terjadi Kesalahan");
         }
 
     }
