@@ -64,6 +64,7 @@
                             <h6 id="title-identity">Sebelum mengirim data laporan, silahkan isi terlebih dahulu akun anda untuk verifikasi data pelapor. <i class="bi bi-info-circle"><span class="text-information">* Akun yang digunakan adalah akun yang terdaftar atau digunakan di Institut Teknologi Del</span></i></h6>
                         </div>
                         <hr>
+                        <br>
 
                         <div class="mb-3">
 

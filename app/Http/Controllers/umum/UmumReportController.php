@@ -45,7 +45,11 @@ class UmumReportController extends Controller
                     $data = json_decode($e->getResponse()->getBody(), true);
                     if($data['result']){
                         $user = $data['user'];
-                        $dataResponse = $this->getUserDetail($user['user_id']);
+                        $role = $user['role'];
+                        $dataResponse = $this->getUserDetail($user['user_id'], $role);
+
+                        Cache::put('token', $data['token'], now()->addHour());
+                    
                             
                         $message = json_decode($dataResponse->getContent());
 
@@ -74,9 +78,15 @@ class UmumReportController extends Controller
 
     }
 
-    public function getUserDetail($user_id){
+    public function getUserDetail($user_id, $role){
 
-        $url = env('API_URL')."library-api/pegawai?userid=".$user_id;
+        $role = '';
+        if($role == 'Mahasiswa'){
+            $url = env('API_URL')."library-api/pegawai?userid=".$user_id;
+        }
+        else{
+            $url = env('API_URL')."library-api/pegawai?userid=".$user_id;
+        }
         $token = trim(Cache::get('token'));
 
         $client = new Client();
