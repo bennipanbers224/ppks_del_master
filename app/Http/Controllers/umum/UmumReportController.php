@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
+use App\Models\report;
 use GuzzleHttp\Client;
+use Carbon\Carbon;
 
 class UmumReportController extends Controller
 {
@@ -52,9 +54,21 @@ class UmumReportController extends Controller
                     
                             
                         $message = json_decode($dataResponse->getContent());
-
                         if($message->success == "Success Response"){
-                            return redirect()->back()->withInput()->with('success', 'Verifikasi akun berhasil, laporan berhasil dikirimkan.');
+                            $store = $this->storeData(
+                                $message->details,
+                                $request->status_pelapor,
+                                $request->incident_date,
+                                $request->incident_desc,
+                                $request->file('report_file'),
+                            );
+                            $storeResponse = json_decode($store->getContent());
+                            if($storeResponse->success == 'Success Store'){
+                                return redirect()->back()->withInput()->with('success', 'Verifikasi akun berhasil, laporan berhasil dikirimkan.');
+                            }else{
+                                return redirect()->back()->withInput()->with('error', $storeResponse->details);
+                            }
+                            
                         }else{
                             return redirect()->back()->withInput()->with('error', $message->error);
                         }
@@ -105,7 +119,8 @@ class UmumReportController extends Controller
 
             return response()->json([
                 'success' => 'Success Response',
-                'error' => ''
+                'error' => '',
+                'details'=>$dataDetailUser[0]['nama']
             ], 200);
 
         } catch (RequestException $e) {
@@ -123,6 +138,52 @@ class UmumReportController extends Controller
             }
         }
         
+    }
+
+    public function storeData($name, $status, $incident_date, $incident_desc, $file){
+        try{
+            if($file==NULL){
+                $report = report::create([
+                    'name'=>$name,
+                    'incident_date'=>$incident_date,
+                    'incident_desc'=>$incident_desc,
+                    'report_status'=>'Active',
+                    'status'=>$status,
+                    'evidence'=>'-'
+                ]);
+            }
+            else{
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $uploadUrl = public_path('report_evidence_file');
+                
+                $file->move($uploadUrl, $fileName);
+                $report = report::create([
+                    'name'=>$name,
+                    'incident_date'=>$incident_date,
+                    'incident_desc'=>$incident_desc,
+                    'report_status'=>'Active',
+                    'status'=>$status,
+                    'evidence'=>$fileName
+                ]);
+                // echo $name ."\n";
+                // echo $status ."\n";
+                // echo $incident_date ."\n";
+                // echo $incident_desc ."\n";
+                // echo $file->getClientOriginalName();
+            }
+    
+            return response()->json([
+                'success' => 'Success Store',
+                'error' => '',
+                'details'=>'Laporan Berhasil di Kirimkan',
+            ], 200);
+        }catch (Exception $e) {
+            return response()->json([
+                'success' => '',
+                'error' => 'Error Response',
+                'details'=>'Terjadi Kesalahan',
+            ], 400);
+        }
     }
 
 }

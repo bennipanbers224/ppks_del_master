@@ -20,7 +20,7 @@
             @endif
             <div class="card-body">
 
-            <form action="{{ route('report.store') }}" method="post">
+            <form action="{{ route('report.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
                     <div class="mb-3">
@@ -30,18 +30,17 @@
                             <div class="col">
 
                                 <label for="exampleFormControlInput1" class="form-label">Tanggal Pelaporan</label>
-                                <input type="date" class="form-control" id="exampleFormControlInput1">
+                                <input type="date" name="incident_date" class="form-control" id="exampleFormControlInput1" required>
 
                             </div>
 
                             <div class="col">
 
                                 <label for="exampleDataList" class="form-label">Status Pelapor</label>
-                                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                                <input class="form-control" name="status_pelapor" list="datalistOptions" id="exampleDataList" placeholder="Type to search... (Korban/Pelapor)" required>
                                 <datalist id="datalistOptions">
-                                    <option value="Pegawai">
-                                    <option value="Dosen">
-                                    <option value="Mahasiswa">
+                                    <option value="Korban">
+                                    <option value="Pelapor">
                                 </datalist>
 
                             </div>
@@ -53,7 +52,23 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Kronologi</label>
-                        <textarea placeholder="Kronologi kejadian dengan jelas" class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+                        <textarea placeholder="Kronologi kejadian dengan jelas" name="incident_desc" class="form-control" id="exampleFormControlTextarea1" rows="10" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">File Bukti (Opsional):</label>
+                            <div style="height: 200px;" id="dropZone" class="border border-primary rounded p-4 text-center">
+                                <i style="font-size: 50px;" id="icon_file" class="bi-upload"></i>
+                                 <p id="fileName">----- Drag and drop a file here or click to select -----</p>
+                            </div>
+                        <input type="file" id="formFile" name="report_file" accept="image/*, video/*" onchange="previewFile()" class="d-none" />
+                    </div>
+
+                    <div class="mb-3">
+                        <div id="file-preview-container" style="margin-top: 20px; display: none;">
+                            <p>Preview:</p>
+                            <iframe id="file-preview" src="" style="width: 100%; height: 500px;" frameborder="0"></iframe>
+                        </div>
                     </div>
 
                     <br>
@@ -158,5 +173,77 @@
         document.querySelector('.bi').addEventListener('mouseleave', function() {
             document.querySelector('.text-information').classList.remove('change');
         });
+
+
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('formFile');
+
+        // Event untuk klik Dropzone
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Event untuk drag-and-drop file
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('border-success');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('border-success');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('border-success');
+            if (event.dataTransfer.files.length) {
+                const file = event.dataTransfer.files[0];
+                fileInput.files = event.dataTransfer.files; // Menyalin file ke input
+                previewFile(); // Memanggil fungsi untuk menampilkan preview
+            }
+        });
+
+        function previewFile() {
+            const previewContainer = document.getElementById('file-preview-container');
+            const pdfPreview = document.getElementById('file-preview');
+            const fileName = document.getElementById('fileName');
+            const iconFile = document.getElementById('icon_file');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+
+                const allowedTypes = [
+                    'image/jpeg',
+                    'image/png',
+                    'image/gif',
+                    'video/mp4',
+                    'video/avi',
+                    'video/mov',
+                ];
+
+                // Validasi tipe file PDF
+                if (allowedTypes.includes(file.type)) {
+
+                    fileName.textContent = `Selected File: ${file.name}`;
+
+                    iconFile.classList.remove('bi-upload');
+                    iconFile.classList.add('bi-file-earmark-arrow-up-fill');
+
+
+                    const fileURL = URL.createObjectURL(file);
+                    pdfPreview.src = fileURL;
+                    previewContainer.style.display = 'block';
+                    previewContainer.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                } else {
+                    alert('Silakan pilih jenis file yang valid.');
+                    previewContainer.style.display = 'none';
+                }
+            }
+        }
+        
+
     </script>
 @endsection
