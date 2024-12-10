@@ -24,7 +24,10 @@ class NewsController extends Controller
 
     public function detailNews(Request $request)
     {
-        $news = DB::table('news')->where('news_id', $request->news_id)->first();
+        $news = News::find($request->news_id);
+        if (!$news) {
+            return redirect()->back()->withErrors(['error' => 'Data tidak ditemukan']);
+        }
         return view('admin.news.detail', compact('news'));
     }
 

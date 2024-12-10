@@ -50,6 +50,9 @@ class DocumentController extends Controller
     public function edit(Request $request)
     {
         $document = Document::where('document_id', $request->document_id)->first();
+        if(!$document){
+            return redirect()->back()->withErrors(['error' => 'Data tidak ditemukan']);
+        }
         return view('admin.document.edit', compact('document'));
     }
 

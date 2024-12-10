@@ -82,8 +82,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/create', [AdminNewsController::class, 'directForm'])->name('admin.news.create');
         Route::post('/store', [AdminNewsController::class, 'store'])->name('admin.news.store');
         Route::post('/upload-image', [AdminNewsController::class, 'uploadImage'])->name('admin.news.upload-image');
-        Route::post('/detail', [AdminNewsController::class, 'detailNews'])->name('admin.news.detail');
-        Route::post('/edit', [AdminNewsController::class, 'edit'])->name('admin.news.edit');
+        Route::any('/detail', [AdminNewsController::class, 'detailNews'])->name('admin.news.detail');
+        Route::any('/edit', [AdminNewsController::class, 'edit'])->name('admin.news.edit');
         Route::put('/update/{news_id}', [AdminNewsController::class, 'update'])->name('admin.news.update');
         Route::post('/delete', [AdminNewsController::class, 'delete'])->name('admin.news.delete');
         Route::post('/admin/news/upload-image', [AdminNewsController::class, 'uploadImage'])->name('news.uploadImage');
@@ -99,7 +99,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [VidiosController::class, 'index'])->name('admin.vidios.index');
         Route::get('/create', [VidiosController::class, 'formCreate'])->name('admin.vidios.create');
         Route::post('/store', [VidiosController::class, 'store'])->name('admin.vidios.store');
-        Route::post('/edit', [VidiosController::class, 'edit'])->name('admin.vidios.edit');
+        Route::any('/edit', [VidiosController::class, 'edit'])->name('admin.vidios.edit');
         Route::put('/update{vidios_id}', [VidiosController::class, 'update'])->name('admin.vidios.update');
         Route::post('/delete', [VidiosController::class, 'delete'])->name('admin.vidios.delete');
         Route::post('/detail', [VidiosController::class, 'detailVidios'])->name('admin.vidios.detail');
@@ -110,7 +110,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [AdminDocumentController::class, 'index'])->name('admin.document.index');
         Route::get('/form', [AdminDocumentController::class, 'form'])->name('admin.document.form');
         Route::post('/store', [AdminDocumentController::class, 'store'])->name('admin.document.store');
-        Route::post('/edit', [AdminDocumentController::class, 'edit'])->name('admin.document.edit');
+        Route::any('/edit', [AdminDocumentController::class, 'edit'])->name('admin.document.edit');
         Route::post('/update', [AdminDocumentController::class, 'update'])->name('admin.document.update');
         Route::post('/delete', [AdminDocumentController::class, 'delete'])->name('admin.document.delete');
     });
@@ -119,9 +119,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('admin.profiles.index');
         Route::get('/create', [ProfileController::class, 'create'])->name('admin.profiles.create');
         Route::post('/store', [ProfileController::class, 'store'])->name('admin.profiles.store');
-        Route::post('/edit', [ProfileController::class, 'edit'])->name('admin.profiles.edit');
+        Route::any('/edit', [ProfileController::class, 'edit'])->name('admin.profiles.edit');
         Route::put('/update/{profile_id}', [ProfileController::class, 'update'])->name('admin.profiles.update');
         Route::post('/delete', [ProfileController::class, 'delete'])->name('admin.profiles.delete');
-        Route::post('/detail', [ProfileController::class, 'detailProfiles'])->name('admin.profiles.detail');
+        Route::any('/detail', [ProfileController::class, 'detailProfiles'])->name('admin.profiles.detail');
     });
 });
