@@ -91,7 +91,6 @@ class DocumentController extends Controller
                 ]);
         }
 
-        // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('admin.document.index')
             ->with('success', 'Dokumen berhasil diperbarui.');
     }
